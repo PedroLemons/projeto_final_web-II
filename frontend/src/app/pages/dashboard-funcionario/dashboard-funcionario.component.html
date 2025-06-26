@@ -1,0 +1,82 @@
+<div class="layout-container">
+  <app-navbar class="sidenav"></app-navbar>
+
+  <main class="content">
+    <section class="container">
+      <header>
+        <h1 class="title">Solicitações</h1>
+        <p class="subtitle">Gerencie as solicitações de requisição</p>
+      </header>
+
+      <div class="solicitacoes-content">
+        <div class="info-text-e-filtros">
+          <div class="info-text">
+            <mat-icon class="info-icon" aria-hidden="true">info</mat-icon>
+            <p>Visualize todas as solicitações.</p>
+          </div>
+
+          <div class="filtros-container">
+            <mat-form-field appearance="outline" floatLabel="auto" class="filtro-item">
+              <mat-label>Status</mat-label>
+              <mat-select [(ngModel)]="filtroStatus" (selectionChange)="onFiltroStatusChange()">
+                <mat-option value="">Todas Recebidas</mat-option> 
+                <mat-option value="1">Aberta</mat-option>
+                <mat-option value="2">Orçada</mat-option>
+                <mat-option value="4">Rejeitada</mat-option> 
+                <mat-option value="3">Aprovada</mat-option> 
+                <mat-option value="5">Redirecionada</mat-option>
+                <mat-option value="6">Arrumada</mat-option>
+                <mat-option value="7">Paga</mat-option>
+                <mat-option value="8">Finalizada</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <form [formGroup]="filtroForm" class="filtro-data-form">
+              <mat-form-field appearance="outline" floatLabel="auto" class="filtro-item">
+                <mat-label>Filtrar Data Por</mat-label>
+                <mat-select formControlName="tipoFiltroData">
+                  <mat-option value="TODAS">Todas as Datas</mat-option>
+                  <mat-option value="HOJE">Hoje</mat-option>
+                  <mat-option value="PERIODO">Período</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <ng-container *ngIf="filtroForm.get('tipoFiltroData')?.value === 'PERIODO'">
+                <mat-form-field appearance="outline" floatLabel="auto" class="filtro-item">
+                  <mat-label>Data Inicial</mat-label>
+                  <input matInput [matDatepicker]="pickerStart" formControlName="start" placeholder="dd/mm/aaaa">
+                  <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                  <mat-datepicker #pickerStart></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" floatLabel="auto" class="filtro-item">
+                  <mat-label>Data Final</mat-label>
+                  <input matInput [matDatepicker]="pickerEnd" formControlName="end" placeholder="dd/mm/aaaa">
+                  <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                  <mat-datepicker #pickerEnd></mat-datepicker>
+                </mat-form-field>
+              </ng-container>
+            </form>
+          </div>
+        </div>
+
+        <div *ngIf="isLoading" class="loading-indicator">
+          <mat-progress-spinner mode="indeterminate" diameter="50"></mat-progress-spinner>
+          <p>Carregando solicitações...</p>
+        </div>
+
+        <div class="cards-container" *ngIf="!isLoading && solicitacoesFiltradas.length > 0">
+          <app-card-solicitacao
+            *ngFor="let solicitacao of solicitacoesFiltradas"
+            [solicitacao]="solicitacao"
+            (finalizarAcao)="handleFinalizarSolicitacao($event)">
+          </app-card-solicitacao>
+        </div>
+
+        <div *ngIf="!isLoading && solicitacoesFiltradas.length === 0" class="sem-solicitacoes-mensagem">
+          <p>Nenhuma solicitação encontrada para os filtros aplicados.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>

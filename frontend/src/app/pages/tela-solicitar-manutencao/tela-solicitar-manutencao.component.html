@@ -1,0 +1,62 @@
+<div class="layout-container">
+    <div class="solicitacao">
+        <div class="content">
+            <h1>Solicitação de Manutenção</h1>
+
+            <form [formGroup]="solicitacaoForm" class="formulario">
+                <label for="descEquip">Descrição do Equipamento</label>
+                <mat-form-field id="topo" appearance="outline">
+                    <input matInput formControlName="descEquip" placeholder="Descrição do Equipamento" required />
+                    <mat-error *ngIf="solicitacaoForm.get('descEquip')?.hasError('required')">
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+
+                <label for="categoria">Escolha a categoria do Equipamento</label>
+                <mat-form-field appearance="outline">
+                    <mat-select formControlName="categoria" placeholder="Categoria" required>
+                        <mat-option *ngFor="let categoria of categorias" [value]="categoria">
+                            {{ categoria }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="solicitacaoForm.get('categoria')?.hasError('required')">
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+
+                <label for="descDefeito">Descrição do Defeito</label>
+                <mat-form-field appearance="outline">
+                    <textarea matInput formControlName="descDefeito" rows="8" style="resize: none;"
+                        placeholder="Descrição do Defeito" required></textarea>
+                    <mat-error *ngIf="solicitacaoForm.get('descDefeito')?.hasError('required')">
+                        Campo obrigatório
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="botoes">
+                    <button id="cancelar" mat-stroked-button type="button" (click)="mostarModalRejeitar()">
+                        Cancelar
+                    </button>
+
+                    <button id="abrir" mat-button type="button" (click)="abrirSolicitacao()">
+                        Abrir Solicitação
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" *ngIf="mostrarRejeicao" (click)="cancelarRejeicao()">
+    <div class="modal-confirmacao" (click)="$event.stopPropagation()">
+        <h4>Você tem certeza que deseja cancelar a solicitação?</h4>
+        <div class="btnsRejeitar">
+            <button id="btnRejeitar" mat-stroked-button (click)="confirmarRejeicao()" routerLink="/home-cliente">
+                Sim
+            </button>
+            <button id="btnCancelar" mat-button (click)="cancelarRejeicao()">
+                Não
+            </button>
+        </div>
+    </div>
+</div>

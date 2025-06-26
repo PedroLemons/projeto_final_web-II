@@ -1,0 +1,184 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow: hidden;
+  padding: 20px;
+}
+
+
+/* Modal padrão */
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 5vh;
+
+  max-width: 70%;
+  max-height: 80vh;
+  min-height: 40vh;
+  width: 100%;
+  height: auto;
+
+  overflow-y: auto;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+}
+
+
+/* Modal de confirmação */
+.modal-confirmacao {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+
+  max-width: 70%;
+  max-height: 80vh;
+  min-height: 35vh;
+  min-width: 40%;
+  width: 100%;
+  height: auto;
+
+  overflow-y: auto;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+}
+
+
+.top {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.top a {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.top a:hover {
+  color: var(--color-rejeitada);
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content h1 {
+  align-self: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 50px;
+  margin-top: 20px;
+  color: var(--color-primary);
+}
+
+.content h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.content p {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 30px;
+
+  word-break: break-word;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  width: fit-content;
+}
+
+.content h2 {
+  align-self: center;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  margin-top: 45px;
+}
+
+#title-confirmacao {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#valor {
+  align-self: center;
+  font-size: 16px;
+  font-weight: 600;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.buttons {
+  margin-top: 30px;
+  align-self: center;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 36px;
+}
+
+#aceitar {
+  background-color: var(--color-finalizada);
+  color: white;
+  width: 100px;
+  transition: 0.3s ease;
+}
+
+#aceitar:hover {
+  background-color: var(--color-finalizada-hover);
+}
+
+#rejeitar {
+  border-color: var(--color-rejeitada);
+  color: var(--color-rejeitada);
+}
+
+/* Confirmação */
+.motivo-field {
+  width: 100%;
+}
+
+.motivo {
+  width: 100%;
+  max-width: 100%;
+  height: 100px;
+  max-height: fit-content;
+}
+
+.btnsRejeitar {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+#btnCancelar {
+  background-color: var(--color-rejeitada);
+  color: white;
+  width: 100px;
+}
+
+#btnRejeitar {
+  border-color: var(--color-finalizada);
+  color: var(--color-finalizada);
+  width: 100px;
+}
